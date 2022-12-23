@@ -18,6 +18,7 @@ import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Container = styled.div`
   flex: 1.1;
   background-color: ${({ theme }) => theme.bgLighter};
@@ -29,7 +30,7 @@ const Container = styled.div`
   top: 0;
   &::-webkit-scrollbar {
     width: 2px;
-}
+  }
 `;
 const Wrapper = styled.div`
   padding: 18px 26px;
@@ -86,6 +87,8 @@ const Title = styled.h2`
 `;
 
 const Menu = ({ darkMode, setDarkMode }) => {
+  const currentUser = useSelector((state) => state.user.Currentuser);
+
   return (
     <Container>
       <Wrapper>
@@ -99,17 +102,20 @@ const Menu = ({ darkMode, setDarkMode }) => {
           <HomeIcon />
           Home
         </Item>
-        <Link to="trends" style={{textDecoration:"none", color: "inherit"}}>
-        <Item>
-          <ExploreOutlinedIcon />
-          Explore
-        </Item>
+        <Link to="trends" style={{ textDecoration: "none", color: "inherit" }}>
+          <Item>
+            <ExploreOutlinedIcon />
+            Explore
+          </Item>
         </Link>
-        <Link to="subscriptions" style={{textDecoration:"none", color: "inherit"}}>
-        <Item>
-          <SubscriptionsOutlinedIcon />
-          Subscriptions
-        </Item>
+        <Link
+          to="subscriptions"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <Item>
+            <SubscriptionsOutlinedIcon />
+            Subscriptions
+          </Item>
         </Link>
         <Hr />
         <Item>
@@ -121,15 +127,17 @@ const Menu = ({ darkMode, setDarkMode }) => {
           History
         </Item>
         <Hr />
-        <Login>
+       {!currentUser &&
+       
+       <Login>
           Sign in to like videos, comment, and subscribe.
-          <Link to="signin" style={{textDecoration:"none"}}>
+          <Link to="signin" style={{ textDecoration: "none" }}>
             <Button>
               <AccountCircleOutlinedIcon />
               SIGN IN
             </Button>
           </Link>
-        </Login>
+        </Login>}
         <Hr />
         <Title>BEST OF LAMATUBE</Title>
         <Item>
