@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { loginFailure, loginStart, loginSuccess } from "../redux/userSlice";
-// axios.defaults.withCredentials = true
+import { auth, provider } from "../firebase";
+import { signInWithPopup } from "firebase/auth";
+axios.defaults.withCredentials = true;
 
 const Container = styled.div`
   display: flex;
@@ -71,26 +73,53 @@ const SignIn = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    dispatch(loginStart())
-    try{
-         const res = await axios.post("http://localhost:5000/api/auth/signin",{name,password},{ withCredentials: true })
-         dispatch(loginSuccess(res.data ))
-    }catch(err){
-      console.log('signin error: ' + err);
+    dispatch(loginStart());
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/signin",
+        { name, password },
+        { withCredentials: true }
+      );
+      dispatch(loginSuccess(res.data));
+    } catch (err) {
+      console.log("signin error: " + err);
       dispatch(loginFailure());
     }
-  } 
+  };
+
+  const signInWithGoogle = async () => {
+    dispatch(loginStart());
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        axios
+          .post(
+            "http://localhost:5000/api/auth/google",
+            {
+              name: result.user.displayName,
+              email: result.user.email,
+              // img: result.user.photoURL //not working
+            },
+            // { withCredentials: true }
+          )
+          .then((res) => {
+            dispatch(loginSuccess(res.data));
+          });
+      })
+      .catch((err) => {
+        dispatch(loginFailure());
+      });
+  };
 
   return (
     <Container>
       <Wrapper>
         <Title>Sign in</Title>
         <SubTitle>to continue to LamaTube</SubTitle>
-        
+
         <Input
           placeholder="username"
           onChange={(e) => setName(e.target.value)}
@@ -102,6 +131,7 @@ const SignIn = () => {
         />
         <Button onClick={handleLogin}>Sign in</Button>
         <Title>or</Title>
+        <Button onClick={signInWithGoogle}>SignIn With Google</Button>
         <Input
           placeholder="username"
           onChange={(e) => setName(e.target.value)}
