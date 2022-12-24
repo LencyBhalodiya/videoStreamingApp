@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
 import axios from "axios";
-
+axios.defaults.withCredentials = true
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -13,7 +13,7 @@ const Home = ({ type }) => {
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     const fetchVideos = async () => {
-      const res = await axios.get(`http://localhost:5000/api/videos/${type}`);
+      const res = await axios.get(`http://localhost:5000/api/videos/${type}`,{ withCredentials: true });
       setVideos(res.data);
     };
     fetchVideos();

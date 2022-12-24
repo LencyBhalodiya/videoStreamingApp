@@ -20,13 +20,15 @@ else
     console.log('Database connected Successfully')
 })
 }
-app.use(cors());
-app.use(cookieParser())
+app.use(cookieParser());
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json());
+
 app.use('/api/auth',authRoutes)
 app.use('/api/users',userRoutes)
 app.use('/api/videos',videoRoutes)
 app.use('/api/comments',commentRoutes)
+
 //for error handling
 app.use((err,req,res,next)=>{
   const status = err.status || 500;
@@ -37,6 +39,7 @@ app.use((err,req,res,next)=>{
     message,
   })
 })
+
 app.listen(5000,()=>{
     connect();
     console.log("Server Connected");

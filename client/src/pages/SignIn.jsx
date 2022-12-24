@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { loginFailure, loginStart, loginSuccess } from "../redux/userSlice";
+// axios.defaults.withCredentials = true
 
 const Container = styled.div`
   display: flex;
@@ -76,7 +77,7 @@ const SignIn = () => {
     e.preventDefault();
     dispatch(loginStart())
     try{
-         const res = await axios.post("http://localhost:5000/api/auth/signin",{name,password})
+         const res = await axios.post("http://localhost:5000/api/auth/signin",{name,password},{ withCredentials: true })
          dispatch(loginSuccess(res.data ))
     }catch(err){
       console.log('signin error: ' + err);
