@@ -35,7 +35,7 @@ export const signin = async (req, res, next) => {
         expires: new Date(new Date().getTime() + 300 * 1000),
       })
       .status(200)
-      .json({ others, token });
+      .json(others);
   } catch (err) {
     next(err);
   }
