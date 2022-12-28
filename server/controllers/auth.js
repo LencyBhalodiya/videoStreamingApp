@@ -31,7 +31,7 @@ export const signin = async (req, res, next) => {
     const { password, ...others } = user._doc;
     res
       .cookie("access_token", token, {
-        httpOnly: true,
+        httpOnly: false,
         expires: new Date(new Date().getTime() + 300 * 1000),
       })
       .status(200)

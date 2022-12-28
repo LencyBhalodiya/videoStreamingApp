@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { loginFailure, loginStart, loginSuccess } from "../redux/userSlice";
 import { auth, provider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
 
 const Container = styled.div`
@@ -74,6 +75,7 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -85,6 +87,7 @@ const SignIn = () => {
         { withCredentials: true }
       );
       dispatch(loginSuccess(res.data));
+      navigate("/")
     } catch (err) {
       console.log("signin error: " + err);
       dispatch(loginFailure());
@@ -107,12 +110,30 @@ const SignIn = () => {
           )
           .then((res) => {
             dispatch(loginSuccess(res.data));
+            navigate("/")
           });
       })
       .catch((err) => {
         dispatch(loginFailure());
       });
   };
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    dispatch(loginStart());
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/signup",
+        { name,email, password },
+        { withCredentials: true }
+      );
+      dispatch(loginSuccess(res.data));
+      navigate("/")
+    } catch (err) {
+      console.log("signin error: " + err);
+      dispatch(loginFailure());
+    }
+  };
+
 
   return (
     <Container>
@@ -142,7 +163,7 @@ const SignIn = () => {
           placeholder="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button>Sign up</Button>
+        <Button onClick={ handleSignUp} >Sign up</Button>
       </Wrapper>
       <More>
         English(USA)

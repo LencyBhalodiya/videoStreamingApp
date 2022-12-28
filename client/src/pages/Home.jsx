@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/userSlice";
 axios.defaults.withCredentials = true
 const Container = styled.div`
   display: flex;
@@ -10,6 +12,9 @@ const Container = styled.div`
 `;
 
 const Home = ({ type }) => {
+
+  const dispatch = useDispatch();
+  
   const [videos, setVideos] = useState([]);
   useEffect(() => {
     const fetchVideos = async () => {
@@ -18,6 +23,18 @@ const Home = ({ type }) => {
     };
     fetchVideos();
   }, [type]);
+
+  useEffect(() => {
+    const fetchVideos =  () => {
+      const token =  document.cookie.split('; ').filter(row => row.startsWith('access_token=')).map(c=>c.split('=')[1])[0];
+      if(!token){
+        dispatch(logout("no token found"));
+      }
+    };
+    fetchVideos();
+  }, []);
+
+
   return (
     <Container>
       {videos.map((video) => (
