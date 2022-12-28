@@ -10,7 +10,7 @@ import Upload from "./Upload";
 const Container = styled.div`
   position: sticky;
   top: 0;
-  background-color: ${({ theme }) => theme.bgLighter};
+  background-color: ${({ theme }) => theme.bg};
   height: 56px;
 `;
 

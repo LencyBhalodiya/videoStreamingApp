@@ -51,8 +51,13 @@ const Button = styled.button`
   padding: 10px 20px;
   font-weight: 500;
   cursor: pointer;
-  background-color: ${({ theme }) => theme.soft};
+  background-color: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.textSoft};
+  &:hover{
+    background-color: ${({ theme }) => theme.textSoft};
+  color: ${({ theme }) => theme.bg};
+   transition: all 0.2s ease-in;
+  }
 `;
 
 const More = styled.div`
@@ -139,7 +144,7 @@ const SignIn = () => {
     <Container>
       <Wrapper>
         <Title>Sign in</Title>
-        <SubTitle>to continue to LamaTube</SubTitle>
+        <SubTitle>to continue to MyTube</SubTitle>
 
         <Input
           placeholder="username"

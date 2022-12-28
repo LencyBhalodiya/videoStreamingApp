@@ -1,20 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import LamaTube from "../img/logo.png";
+// import MyTube from "../img/logo.png";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreOutlinedIcon from "@mui/icons-material/ExploreOutlined";
 import SubscriptionsOutlinedIcon from "@mui/icons-material/SubscriptionsOutlined";
 import VideoLibraryOutlinedIcon from "@mui/icons-material/VideoLibraryOutlined";
 import HistoryOutlinedIcon from "@mui/icons-material/HistoryOutlined";
 import LibraryMusicOutlinedIcon from "@mui/icons-material/LibraryMusicOutlined";
-import SportsEsportsOutlinedIcon from "@mui/icons-material/SportsEsportsOutlined";
 import SportsBasketballOutlinedIcon from "@mui/icons-material/SportsBasketballOutlined";
-import MovieOutlinedIcon from "@mui/icons-material/MovieOutlined";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
 import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import FlagOutlinedIcon from "@mui/icons-material/FlagOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsBrightnessOutlinedIcon from "@mui/icons-material/SettingsBrightnessOutlined";
 import { Link } from "react-router-dom";
@@ -28,9 +24,11 @@ const Container = styled.div`
   position: sticky;
   overflow: scroll;
   top: 0;
+  font-family: sans-serif;
   &::-webkit-scrollbar {
     width: 2px;
   }
+
 `;
 const Wrapper = styled.div`
   padding: 18px 26px;
@@ -56,6 +54,7 @@ const Item = styled.div`
 
   &:hover {
     background-color: ${({ theme }) => theme.soft};
+    color:white;
   }
 `;
 
@@ -92,16 +91,19 @@ const Menu = ({ darkMode, setDarkMode }) => {
   return (
     <Container>
       <Wrapper>
-        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit",fontSize: "1.5rem" }}>
           <Logo>
-            <Img src={LamaTube} />
-            LamaTube
+            <Img src=""  />
+            MyTube
           </Logo>
         </Link>
+        <Link to= "/"  style={{ textDecoration: "none", color: "inherit"}}>
         <Item>
           <HomeIcon />
           Home
         </Item>
+        </Link>
+        
         <Link to="trends" style={{ textDecoration: "none", color: "inherit" }}>
           <Item>
             <ExploreOutlinedIcon />
@@ -149,18 +151,6 @@ const Menu = ({ darkMode, setDarkMode }) => {
           Sports
         </Item>
         <Item>
-          <SportsEsportsOutlinedIcon />
-          Gaming
-        </Item>
-        <Item>
-          <MovieOutlinedIcon />
-          Movies
-        </Item>
-        <Item>
-          <ArticleOutlinedIcon />
-          News
-        </Item>
-        <Item>
           <LiveTvOutlinedIcon />
           Live
         </Item>
@@ -168,10 +158,6 @@ const Menu = ({ darkMode, setDarkMode }) => {
         <Item>
           <SettingsOutlinedIcon />
           Settings
-        </Item>
-        <Item>
-          <FlagOutlinedIcon />
-          Report
         </Item>
         <Item>
           <HelpOutlineOutlinedIcon />

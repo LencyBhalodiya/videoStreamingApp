@@ -2,7 +2,7 @@ import axios from "axios";
 import React,{useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import {format} from 'timeago.js';
+import TimeAgo from "react-timeago"
 
 const Container = styled.div`
   width: ${(props) => props.type !== "sm" && "310px"};
@@ -10,6 +10,7 @@ const Container = styled.div`
   cursor: pointer;
   display: ${(props) => props.type === "sm" && "flex"};
   gap: 10px;
+  font-family: sans-serif;
 `;
 
 const Image = styled.img`
@@ -17,6 +18,12 @@ const Image = styled.img`
   height: ${(props) => (props.type === "sm" ? "120px" : "202px")};
   background-color: #999;
   flex: 1;
+  border-radius: 11px;
+  &:hover{
+    width: 101%;
+  height: ${(props) => (props.type === "sm" ? "120px" : "205px")};
+   transition: all 0.3s ease-in;
+  }
 `;
 
 const Details = styled.div`
@@ -78,7 +85,7 @@ const Card = ({ type, video }) => {
           <Texts>
             <Title> {video.title} </Title>
             <ChannelName> {channel.name} </ChannelName>
-            <Info>{video.views} • {video.createdAt}</Info>
+            <Info>{video.views} • <TimeAgo date={video.createdAt} /> </Info>
           </Texts>
         </Details>
       </Container>
