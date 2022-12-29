@@ -82,9 +82,10 @@ $ npm run build // this will build the server code to es5 js codes and generate 
 
 ## BUGs or comments
 
-[Create new Issues] or solve some error and give a pull request to update the change
+[Create new Issues] or solve some error then give a pull request to update the change
 
 Email Me: worklency@gmail.com (welcome, say hi)
 
 ## Author
-
+lency bhalodiya
+Connect with me using linkedln and twitter
