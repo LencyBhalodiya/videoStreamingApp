@@ -66,11 +66,11 @@ const Hr = styled.hr`
 const Login = styled.div``;
 const Button = styled.button`
   padding: 5px 15px;
-  background-color: transparent;
-  border: 1px solid #3ea6ff;
-  color: #3ea6ff;
+  background-color: #00bfff;
+  color: #fff;
+  border-radius: 1px solid white;
   border-radius: 3px;
-  font-weight: 500;
+  font-weight: 600;
   margin-top: 10px;
   cursor: pointer;
   display: flex;
